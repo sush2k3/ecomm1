@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stationery Store</title>
+  <style>
+    .product {
+      display: inline-block;
+      margin: 20px;
+      text-align: center;
+    }
+    .product img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-title {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .add-to-cart {
+      display: inline-block;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .cart {
+      width: 30px;
+      height: 30px;
+      background-color: Black;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+    .cart-number {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 20px;
+      height: 20px;
+      background-color: yellow;
+      color: black;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 20px;
+      font-size: 12px;
+    }
+    .cart-display {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f9f9f9;
+      padding: 20px;
+      max-width: 400px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+    }
+    .cart-item {
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+    }
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .item-quantity {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+    .quantity-label {
+      margin-right: 5px;
+    }
+    .quantity-counter {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      text-align: center;
+      line-height: 30px;
+    }
+    .clear-cart {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Stationery Store</h1>
+
+<nav class="navbar">
+<div class="nav">
+    <img src="img/dark-logo.png" class="brand-logo" alt="">
+    <div class="nav-items">
+        <div class="search">
+            <input type="text" class="search-box" placeholder="search brand, product">
+            <button class="search-btn">search</button>
+        </div>
+        <a href="#"><img src="img/user.png" alt=""></a>
+        <a href="#"><img src="img/cart.png" alt=""></a>
+    </div>
+</div>
+</nav>
+<style>
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'roboto', sans-serif;
+}
+
+.navbar{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f5f5f5;
+    z-index: 9;
+}
+
+.nav{
+    padding: 10px 10vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.brand-logo{
+    height: 60px;
+}
+
+.nav-items{
+    display: flex;
+    align-items: center;
+}
+
+.search{
+    width: 500px;
+    display: flex;
+}
+
+.search-box{
+    width: 80%;
+    height: 40px;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 1px solid #d1d1d1;
+    text-transform: capitalize;
+    background: none;
+    color: #a9a9a9;
+    outline: none;
+}
+
+.search-btn{
+    width: 20%;
+    height: 40px;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #383838;
+    color: #fff;
+    text-transform: capitalize;
+    font-size: 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.search-box::placeholder{
+    color: #a9a9a9;
+}
+
+.nav-items a{
+    margin-left: 20px;
+}
+
+.nav-items a img{
+    width: 30px;
+}
+
+</style>
+
+
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/manga%20pen.jpg" alt="Pen">
+    <h3 class="product-title">Manga Pen</h3>
+    <p>Rs. 15/pen</p>
+    <button class="add-to-cart" onclick="addToCart('Manga Pen')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/1pc%2010%20Color%20Bear%20Decor%20Random%20Colored%20%20Ballpoint%20Pen%20Set.jpg" alt="Notebook">
+    <h3 class="product-title">10 in 1 bear pen</h3>
+    <p>Rs. 30/pen</p>
+    <button class="add-to-cart" onclick="addToCart('10 in 1 bear pen')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/5%20Macaron%20Gel%20Pen%20Set%20-%20Black%20Ink%20-%20Mint.jpg" alt="Ruler">
+    <h3 class="product-title">Pastel colour pen</h3>
+    <p>Rs. 20/pen</p>
+    <button class="add-to-cart" onclick="addToCart('Pastel color pen')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Pastel%20Pen%20Set%20-%206pcs%20set!.jpg" alt="Ruler">
+    <h3 class="product-title">Pastel colour pen set</h3>
+    <p>Rs. 50/set</p>
+    <button class="add-to-cart" onclick="addToCart('pastel colour pen set')">Add to Cart</button>
+  </div>
+
+
+
+
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/1pc%20Cartoon%20Bear%20Pattern%20Random%20Ballpoint%20Pen.jpg" alt="Pen">
+    <h3 class="product-title">Cartoon bear printed pen pencil</h3>
+    <p>Rs. 25/pencil</p>
+    <button class="add-to-cart" onclick="addToCart('Cartoon bear printed pen pencil')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/6pcs%20Cartoon%20Animal%20Print%20Gel%20Pen.jpg" alt="Notebook">
+    <h3 class="product-title">Cartoon animal printed pen pencil</h3>
+    <p>Rs. 20/pencil</p>
+    <button class="add-to-cart" onclick="addToCart('Cartoon animal printed pen pencil')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Rainbow%20Molang%20Pencils.jpg" alt="Ruler">
+    <h3 class="product-title">Rainbow molang pen pencils</h3>
+    <p>Rs. 30/pencil</p>
+    <button class="add-to-cart" onclick="addToCart('Rainbow molang pen pencils')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/6pcs%20Astronaut%20Print%20Ballpoint%20Pen.jpg" alt="Ruler">
+    <h3 class="product-title">Astronaut Print pen pencils</h3>
+    <p>Rs. 25/pencil</p>
+    <button class="add-to-cart" onclick="addToCart('Astronaut Print pen pencils')">Add to Cart</button>
+  </div>
+
+
+
+
+ <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/cat%20paw%20eraser.jpg" alt="Pen">
+    <h3 class="product-title">Cat paw eraser</h3>
+    <p>Rs. 20/eraser</p>
+    <button class="add-to-cart" onclick="addToCart('Cat paw eraser')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/1pc%20Random%20Cartoon%20Press%20Eraser.jpg" alt="Notebook">
+    <h3 class="product-title">Cartoon press erasers</h3>
+    <p>Rs. 20/eraser</p>
+    <button class="add-to-cart" onclick="addToCart('Cartoon press erasers')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Fruit%20Erasers.jpg" alt="Ruler">
+    <h3 class="product-title">Fruit Erasers</h3>
+    <p>Rs. 5/eraser</p>
+    <button class="add-to-cart" onclick="addToCart('Fruit Erasers')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Sliced%20Bread%20Eraser.jpg" alt="Ruler">
+    <h3 class="product-title">Bread sliced erasers</h3>
+    <p>Rs. 15/packet</p>
+    <button class="add-to-cart" onclick="addToCart('Bread sliced erasers')">Add to Cart</button>
+  </div>
+
+
+
+ <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/1pc%20Random%20Pencil%20Sharpener.jpg" alt="Pen">
+    <h3 class="product-title">Pencil Sharpener</h3>
+    <p>Rs. 15/shapener</p>
+    <button class="add-to-cart" onclick="addToCart('Pencil Sharpener')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/1pc%20Random%20Sharpener%20With%201pc%20Eraser%20Set.jpg" alt="Notebook">
+    <h3 class="product-title">Notebook shaped sharpener</h3>
+    <p>Rs. 10/sharpener</p>
+    <button class="add-to-cart" onclick="addToCart('Notebook shaped sharpener')">Add to Cart</button>
+  </div>
+
+
+
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/4f3c8584-6bbe-4a9d-8c56-ffabdb628905.jpg" alt="Ruler">
+    <h3 class="product-title">Kawaii Bear Sticky notes</h3>
+    <p>Rs. 35/sticky note packet</p>
+    <button class="add-to-cart" onclick="addToCart('Kawaii Bear Sticky notes')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Mini%20Pastel%20Washi%20Tape%20Set.jpg">
+<h3 class="product-title">Kawaii Pastel coloured sticky notes</h3>
+    <p>Rs. 35/sticky note packet </p>
+    <button class="add-to-cart" onclick="addToCart('Pastel coloured sticky notes')">Add to Cart</button>
+  </div>
+
+
+
+<div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/stapler.jpg" alt="Pen">
+    <h3 class="product-title">Paw shaped stapler</h3>
+    <p>Rs. 30/Stapler</p>
+    <button class="add-to-cart" onclick="addToCart('Paw shaped stapler')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Panda%20Shaped%20Mini%20Stapler.jpg" alt="Notebook">
+    <h3 class="product-title">Panda shaped mini stapler</h3>
+    <p>Rs. 30/stapler</p>
+    <button class="add-to-cart" onclick="addToCart('Panda shaped mini stapler')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/2pcs%20Random%20Color%20Mini%20Stapler%20&%20Staples.jpg" alt="Ruler">
+    <h3 class="product-title">Pastel mini stapler</h3>
+    <p>Rs. 25/stapler</p>
+    <button class="add-to-cart" onclick="addToCart('Pastel mini stapler')">Add to Cart</button>
+  </div>
+
+ <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/26%20Amazing%20Products%20with%20MARBLE%20touch%20to%20it%20-%20The%20Architects%20Diary.jpg" alt="Ruler">
+    <h3 class="product-title">Marble stapler</h3>
+    <p>Rs. 80/stapler</p>
+    <button class="add-to-cart" onclick="addToCart('marble stapler')">Add to Cart</button>
+  </div>
+
+
+
+<div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/0a1436b2-37dc-4219-aef9-fde4fb33dd0d.jpg" alt="Pen">
+    <h3 class="product-title">Floral print notebook</h3>
+    <p>Rs. 150/notebook</p>
+    <button class="add-to-cart" onclick="addToCart('Floral print notebook')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Cartoon%20Graphic%20Notebook.jpg" alt="Notebook">
+    <h3 class="product-title">Cartoon Graphic Notebook</h3>
+    <p>Rs. 150/notebook</p>
+    <button class="add-to-cart" onclick="addToCart('Cartoon Graphic Notebook')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/notebook.jpg" alt="Ruler">
+    <h3 class="product-title">Molang Diary</h3>
+    <p>Rs. 200/diary</p>
+    <button class="add-to-cart" onclick="addToCart('Molang Diary')">Add to Cart</button>
+  </div>
+
+ <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/diary.jpg" alt="Ruler">
+    <h3 class="product-title">Bear Diary</h3>
+    <p>Rs. 200/diary</p>
+    <button class="add-to-cart" onclick="addToCart('Bear Diary')">Add to Cart</button>
+  </div>
+
+
+
+<div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/pouch.jpg" alt="Pen">
+    <h3 class="product-title">Pastel print pouch</h3>
+    <p>Rs. 100/pouch</p>
+    <button class="add-to-cart" onclick="addToCart('Pastel print pouch')">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Kawaii.jpg" alt="Notebook">
+    <h3 class="product-title">Kawaii Fruit Pouch</h3>
+    <p>Rs. 200/pouch</p>
+    <button class="add-to-cart" onclick="addToCart('Kawaii Fruit Pouch')">Add to Cart</button>
+  </div>
+
+
+
+  <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Mini%20Pastel%20Washi%20Tape%20Set.jpg" alt="Ruler">
+    <h3 class="product-title">Pastel washi tape set</h3>
+    <p>Rs. 40/box</p>
+    <button class="add-to-cart" onclick="addToCart('Pastel washi tape set')">Add to Cart</button>
+  </div>
+
+ <div class="product">
+    <img src="file:///C:/Users/User/Desktop/E%20commerce%20website/products/Pet%20Washi%20Tape.png" alt="Ruler">
+    <h3 class="product-title">Animal printed washi tape</h3>
+    <p>Rs. 40/box</p>
+    <button class="add-to-cart" onclick="addToCart('Animal printed washi tape')">Add to Cart</button>
+  </div>
+
+
+  <button class="cart" onclick="toggleCart()">Cart</button>
+  <div class="cart-number" id="cartItemCount">0</div>
+
+  <div class="cart-display" id="cartDisplay">
+    <h2>Cart Items:</h2>
+    <div id="cartItems"></div>
+    <button class="clear-cart" onclick="clearCart()">Clear Cart</button>
+  </div>
+
+  <script>
+    var cartItemCount = 0;
+    var cartVisible = false;
+    var cartItems = [];
+
+    function addToCart(item) {
+      cartItemCount++;
+      document.getElementById("cartItemCount").textContent = cartItemCount;
+
+      // Check if the item already exists in the cart
+      var existingItem = cartItems.find(function (cartItem) {
+        return cartItem.name === item;
+      });
+
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cartItems.push({ name: item, quantity: 1 });
+      }
+
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      var cartItemsContainer = document.getElementById("cartItems");
+      cartItemsContainer.innerHTML = "";
+
+      cartItems.forEach(function (cartItem) {
+        var newItem = document.createElement("div");
+        newItem.classList.add("cart-item");
+
+        var itemImage = document.createElement("img");
+        itemImage.src = cartItem.name.toLowerCase() + ".jpg";
+        itemImage.alt = cartItem.name;
+        newItem.appendChild(itemImage);
+
+        var itemTitle = document.createElement("h4");
+        itemTitle.textContent = cartItem.name;
+        newItem.appendChild(itemTitle);
+
+        var itemQuantity = document.createElement("div");
+        itemQuantity.classList.add("item-quantity");
+
+        var quantityLabel = document.createElement("span");
+        quantityLabel.classList.add("quantity-label");
+        quantityLabel.textContent = "Quantity:";
+        itemQuantity.appendChild(quantityLabel);
+
+        var quantityCounter = document.createElement("input");
+        quantityCounter.classList.add("quantity-counter");
+        quantityCounter.type = "number";
+        quantityCounter.value = cartItem.quantity;
+        quantityCounter.min = "1";
+        quantityCounter.addEventListener("change", function () {
+          updateQuantity(cartItem.name, parseInt(this.value));
+        });
+        itemQuantity.appendChild(quantityCounter);
+
+        newItem.appendChild(itemQuantity);
+
+        cartItemsContainer.appendChild(newItem);
+      });
+    }
+
+    function updateQuantity(item, quantity) {
+      var cartItem = cartItems.find(function (cartItem) {
+        return cartItem.name === item;
+      });
+
+      if (cartItem) {
+        cartItem.quantity = quantity;
+      }
+
+      updateCartDisplay();
+    }
+
+    function clearCart() {
+      cartItemCount = 0;
+      cartItems = [];
+      document.getElementById("cartItemCount").textContent = cartItemCount;
+      updateCartDisplay();
+    }
+
+    function toggleCart() {
+      cartVisible = !cartVisible;
+      var cartDisplay = document.getElementById("cartDisplay");
+      if (cartVisible) {
+        cartDisplay.style.display = "block";
+      } else {
+        cartDisplay.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
